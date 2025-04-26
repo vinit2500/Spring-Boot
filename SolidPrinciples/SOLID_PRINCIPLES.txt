@@ -1,0 +1,20 @@
+SOLID PRINCIPLES => Final agenda of solid principle to increase the overall code quality. SP pointed of this is problemetic situation.
+
+=> Focus on how readable is your code, maintainable, extendable.
+
+How to detect when SRP is not fulfilled 
+
+1 => Monster function -> Just fancy term simply a function that do a lot of things.
+  example => in node js in controller they handle req, res, db interaction, business logic everything inside a same function.
+2 => common/util folder -> suppose we have function getDateTime and generateRandomNumber in same class then again it is a problematic 
+     scenario.
+3 => too much if else -> in every if else in else technically you are doing something different they are not related each other then 
+     there may be voilating the SRP. 
+
+Example of SRP => in c++ STL every class has one region to change like map,set,list everyone has seperate classes.
+
+Strategy pattern resolves open closed principles issues in your code.
+
+hashnode, dev.2, medium articles 
+
+
