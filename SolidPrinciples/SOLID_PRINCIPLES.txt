@@ -15,6 +15,40 @@ Example of SRP => in c++ STL every class has one region to change like map,set,l
 
 Strategy pattern resolves open closed principles issues in your code.
 
-hashnode, dev.2, medium articles 
+hashnode, dev.2, medium articles are best.
+
+Q => what is an abstrcat class?
+A => we can not instantiate an abstarct class means we can't create a object of it.
+
+Q => what is the purpose if abstarct class?
+A => Genarally it is used as Base class for other classes to provide common defination that multiple derived classes can share.
+
+-> if child class needs some common implementation then one way to achieve this is abstract class.
+-> abstract classes supports two types of method first abstarct(only signature which does not have an implementation)
+   and second non abstract(concreate which have implementation or contains logic)
+
+-> if any class extends this abstarct class can override the abstract and non abstract methid also but abstract method does not have
+   any implementation so it is mandatory to override.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Interfaces => this are simple contract and they do not have any implementation. we can not create object of interface.
+-> only abstract methods are there no concreate method they do not have any constaructor.
+
+Q => what is the use case of interface?
+A => you are going to have multiple implementations that need to share the same signature but they do not have any common
+     behaviour that's where you have to use interfaces.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q => why java does not support multiple inheritance?
+A => suppose class A has foo method class B has foo method and class C is extending both A and B so there is confusion of which foo
+     method is called that why we can not do liks class C extends A,B and java does not support multiple inheritance it will be             compile time issue.
+     there can be multiple classes with foo method like A,B,C.... etc.
+
+solution of this problem :
+
+
+
+
+
 
 
