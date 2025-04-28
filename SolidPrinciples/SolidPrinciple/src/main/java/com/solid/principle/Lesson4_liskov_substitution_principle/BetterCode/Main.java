@@ -10,6 +10,10 @@ import java.util.List;
   LSP says that subtypes must be substitutable for base type.
       OR
   Objects of a child class should be as it is substitutable in variable of parent class.
+  expalination of line no 12
+  Parent -> Bird
+  Child -> Sparrow
+  Bird b = new Sparrow()
   -> No change should be required in the codebase to accomodate a specific child class or you
   can say child classes should not need special treatment.
   -> child class do exactly what the parent class expects.

@@ -1,0 +1,74 @@
+Suppose E-Commerce application
+
+abstract class User {
+  //Too many behaviour in this interface
+  abstract canUploadProducts()
+  abstract canBuyProducts()
+  abstract canApproveProducts()
+  abstract canModifyProduct()
+}
+
+Seller extends User {
+   //but problem
+   seller can not approve product
+}
+
+Admin extends User {
+   //can do everything
+}
+
+Buyer extends User {
+   //but problem
+   can not approve
+   can not modify
+}
+
+Solution :
+ICanBuy, ICanModify, ICanApprove, ICanUpload create interfaces like this.
+Seller implements ICanModify,ICanUpload
+
+-> The problem here is not the abstract class.
+Problem => An entity may be composed of a combination of behaviours. it might not have all the
+           possible behaviour.
+-> In simple words we are forcing to override methods to Seller, Buyer .... unneccessary.
+-> Same problem with Liskov substitution exists.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+abstarct class Account {
+    //consider all abstract method
+    abstarct withdraw()
+    deposit
+    checkbalance
+    payEmi
+}
+
+FdAccount extends Account {
+   //problem extra method
+}
+
+EducationLoan extends Account {
+   //problem extra method
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ISP status that no client should be forced to exhibit a behaviour.
+This happens beacuse of bulky interfaces/abstract classes.
+IMP LINE =======> ISP is SRP for interfaces
+instead of having bulky interfaces you try to segregate behaviour into different interfaces
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Solution
+
+IAccount => contains checkBalance => common interface we can ay everyone need checkBalance method
+IFixedDeposit
+IDeposit
+IWithdraw
+ILoan
+
+class FbAccount implements IFixedDeposit {
+
+}
+
+class EducationLoanAccount implements IAccount,IDeposit {
+
+}

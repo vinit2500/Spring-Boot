@@ -2,7 +2,9 @@ SOLID PRINCIPLES => Final agenda of solid principle to increase the overall code
 
 => Focus on how readable is your code, maintainable, extendable.
 
-How to detect when SRP is not fulfilled 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Q => How to detect when SRP is not fulfilled 
 
 1 => Monster function -> Just fancy term simply a function that do a lot of things.
   example => in node js in controller they handle req, res, db interaction, business logic everything inside a same function.
@@ -13,12 +15,16 @@ How to detect when SRP is not fulfilled
 
 Example of SRP => in c++ STL every class has one region to change like map,set,list everyone has seperate classes.
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 Strategy pattern resolves open closed principles issues in your code.
 
 hashnode, dev.2, medium articles are best.
 
 Q => what is an abstrcat class?
 A => we can not instantiate an abstarct class means we can't create a object of it.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Q => what is the purpose if abstarct class?
 A => Genarally it is used as Base class for other classes to provide common defination that multiple derived classes can share.
@@ -45,6 +51,13 @@ A => suppose class A has foo method class B has foo method and class C is extend
      there can be multiple classes with foo method like A,B,C.... etc.
 
 solution of this problem :
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+interface segregation is extended version of Liskov substitution principle.
+
+SOLID => I and D are very important.
+I stands for interface segregation. it is also said that ISP(interface segregation principle)
 
 
 
