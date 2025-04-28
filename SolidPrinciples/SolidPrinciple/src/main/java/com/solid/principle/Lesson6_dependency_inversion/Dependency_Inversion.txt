@@ -1,0 +1,29 @@
+Dependency Inversion Principle => Simply says that instead of depending on concreate classes
+you should depend on abstraction.
+
+Internet defination => High level module should not depend on low level modules but instead
+depend on abstract class.
+
+
+class OrderService {
+
+    OrderRepository orderRepo;
+
+    //jo bhi OrderService ko call krega woh pass krega object
+    OrderService(OrderRepository orderRepo) {
+       this.orderRepo = orderRepo;
+    }
+
+}
+
+interface OrderRepository {
+
+}
+
+class OrderMySql implements OrderRepository {
+
+}
+
+class OrderMongo implements OrderRepository {
+
+}
