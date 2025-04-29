@@ -1,0 +1,5 @@
+#Situation where too many attributes can be problematic 
+
+1 => creation of object for those object which has too many attribute can be problematic. see in problematic code
+2 => validate the properties before object creation.
+
