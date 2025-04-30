@@ -36,7 +36,10 @@ public class Product {
      # in the hashmap what if there is a spelling mistake in propery
 
      price -> Price like this
+     we are givin6g opportunity to caller of the product class to make a miskates that sign of bad code
 
+     SOLUTION => object of another class which have all the same attribute as Product class
+     let's create one class name Builder
     */
 
 }
