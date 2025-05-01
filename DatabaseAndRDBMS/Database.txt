@@ -1,0 +1,67 @@
++++++++++++++++++++++ FILE SYSTEMS +++++++++++++++++++++
+
+Data => some important useful piece of information that give some collective analysis
+        about any particular field.
+
+File Based System -> earlier file based system was used for storing data before databases.
+Issues in file based system
+-> Data redundancy
+   suppose school teacher maintain student marks in excel now incharge says give me data of top 10 student on
+   basis of marks. so teacher will copy paste top 10 students in new excel sheet and give it to incharge.
+-> Data inconsistency
+   Now suppose one student came to teacher and says please update my marks there was some mistake so now teacher
+   will update marks on his own sheet but what about incharge sheet.
+-> Difficult data access
+   suppose we interact through app, website of school but don't know marks is coming from updated sheet or not.
+-> Security
+   earlier was security issues with excel like anyone can update data or ...
+
++++++++++++++++++++++ DATABASES +++++++++++++++++++++
+
+Databases => it is collection of related data.
+-> what does related data means like in university data there will be student name, age, enrollment no ....
+   it can not contains student salary means it is not related data.
+-> helps to solve problem of redundency , inconsistency
+-> you can integrate any application with database means from same database we are showing data to mobile app
+   and website also.
+
+
++++++++++++++++++++++ DBMS +++++++++++++++++++++
+
+DBMS => DBMS is a kind of layer between your actual stored database and applications.
+-> DBMS provides software to process queries
+-> DBMS provides software to access data
+-> DBMS is kind of collection of programs or we can say that it is kind of like management system.
+   what does it manage it manages a database
+   OR
+-> DBMS is a kind of management system software that gives us functionality which we can easily query some
+   data in database, process some data, add , update , fetch some data.
+-> The goal of DBMS is to make sure that reterival and the storage of the information from user to the stored
+   database is as smooth as possible.
+-> DBMS is set of software or interface between user and database.
+-> that's why we called as DBMS.
+
++++++++++++++++++++++ WHAT IS SQL +++++++++++++++++++++
+Mysql, pgsql, oraclesql this are actually database management system softwares.
+Mysql, pgsql, oraclesql => they understand one common language SQL(structed query language) so they all can interact
+                           using SQL
+
++++++++++++++++++++++ FEATURES WITH DBMS +++++++++++++++++++++
+constraints => limitation or conditions when you store data
+-> Sharing the data is very easy
+-> we can also apply constraint suppose in excel sheet marks can be added negative but in database not
+   if constraint is there.
+
+
++++++++++++++++++++++ RDBMS +++++++++++++++++++++
+Types of DBMS
+
+1)RDBMS => which stores data in tabular format.
+ table -> represents collection of entities
+ column -> represents properties of entities
+ row -> represents actual data of an entity
+
+
+
+
+
