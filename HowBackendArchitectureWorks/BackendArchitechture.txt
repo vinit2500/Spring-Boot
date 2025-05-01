@@ -1,0 +1,54 @@
+Q = > What happens when you do www.google.com?
+A = >
+          #first we need to understand client server architecture
+          what is client?
+          client => client is anything where users can interact for providing info & collecting output.
+             ex => mobile apps, web apps, desktop app, watch apps.
+          Not one defination
+          another defination of client => any service which is capable of raising a request for a process to happen.
+             ex => Bank EMI we do not need to pay emi on bank app it automatically detect.
+
+          ex => Loan provider Bank of barodra
+                your account on HDFC bank
+                then on month starting BOB automatically request to HDFC bank without your interaction.
+                -> Jo kch particular time peroid pe request kr rha hai woh bhi client hai
+
+          what is server?
+          Server => any machine or a process in the machine which can collect requests process them  & give response.
+          -> we can setup our own server in our own machine
+          -> like above example HDFC is a server and BOB is a client.
+
+          This client server combination lays down the foundation of client server architechture.
+          when we open zomato and search for restraurent in this case our mobile phone is client.
+
+A => we hit www.google.com
+     first thing => it is something like this https://www.google.com internally add https:
+     -> in new laptop when we type bookMyShow in browser so is bookMyShow home page present in your laptop of couse not
+     -> so where this is present it is present in bookMyShow server this server can be present at remote location
+     -> this servers will be actual machine on which some logic google, bookMyShow all of this kind of this applications
+        have actually deployed which is capable of collecting requests and sending response back.
+     -> computer network => two or more computer can connect each other can share resources. ex => mobile hotspot
+     -> Internet => Internet is a network of computer networks that has been prepared for so very long period of time.
+     -> Engineers host their application on internet. and through IP address we identify application in network.
+     -> IP address => IP address helps to identify network or machine inside a network.
+
+     when we write www.google.com => this request does not directly go to server instead it goes to DNS(domain name servers)
+     DNS tries to map the domain name to the corresponding IP address and send you back the IP address that you are looking for to the browser.
+     then using that IP address browser try to communicate the server of instagram,google...
+     DNS tells us that for every particular domain what is the corresponding IP address.
+
+     dig command of linux => dig {domainName} or dig google.com will return IP address of google.
+
+     we have laptop of 8 GB now we need 16 GB so we have upgrade from 8 to 16 this is vertical scaling.
+     Issue 1 => there is a limit like beyond limit we can't extend.
+
+     so we comes to horizontal scaling instead of buying a more powerful machine(app server) we buy multiple machine of mediaocur power.
+
+     LOAD BALANCER => distribute request into multiple machine(app server).
+     Depends on traffic what we have to do horizontal or vertical.
+     Cloud services provides both the scaling like AWS.
+
+
+
+
+
