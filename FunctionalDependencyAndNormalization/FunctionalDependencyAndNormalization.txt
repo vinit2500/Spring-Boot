@@ -1,0 +1,203 @@
++++++++++++++++++++++ INTRODUCTION TO NORMALIZATION +++++++++++++++++++++
+
++++++++++++++++++++++ DATABASE SCHEMA +++++++++++++++++++++
+-> schema
+   blueprint of the database that we will create how we will store data, structure of table and relation
+   between tables etc is defined in it.
+
++++++++++++++++++++++ FUNCTIONAL DEPENDENCY +++++++++++++++++++++
+column -> attributes
+rows -> tuples
+
+FD -> it defines relationship between two attributes
+represent FD like this
+              X -> Y => means Y is functionally dependent on X and X is determinent
+              Y depends on X means that for every valid value of X we can uniquely identified Y
+
+              Table name = Employee_table
+              +-------------------------------------+
+              | e_id | e_name            | e_salary |
+              +-------------------------------------+
+              | 1    | vinit@gmail.com   | 9999     |
+              | 2    | golu@gmail.com    | 2222     |
+              +--------------------------------------
+-> Now here there exists a bunch of FD between different column
+
+e_id -> e_name => e_name depends on e_id         because e_id is unique that's why e_name, e_salary depends on e_id
+e_id -> e_salary => e_salary depends on e_id
+
+e_name -> e_salary => this is not a FD because two employees can have same name
+
+
+FD is theoretical concept used in database design.
+
+
++++++++++++++++++++++ AXIOMS +++++++++++++++++++++
+
+Bunch of rule that exists for FD
+
+suppose address, state, houseNo are exists in same table
+    state is subset(C) of address
+    houseNo is subset(C) of address
+
+1) Reflexivity => if you detect any two attribute such that one attribute is subset of other attribute
+               then you can say that state is functionally depend on address
+               and houseNo is functionally dependent on address.
+
+    address -> state
+    address -> houseNO
+
+2) Augmentation or partial dependency => partial dependency says that we have an attribute Y that is functionally
+                                         dependent on X then the attributes Y and Z are functional dependent on
+ XZ for any attribute Z then there is partial dependency.
+
+ if X -> Y , then XZ -> YZ for any attribute Z then there is partial dependency.
+
+p_id is project id.
+
++------+--------+-------+------+-----------+
+| e_id | e_name | e_age | p_id | e_address |
++------+--------+-------+------+-----------+
+|    1 | aditya |    23 |   77 | a1        |
+|    2 | john   |    22 |   98 | a2        |
+|    3 | roman  |    88 |   12 | a3        |
+|    4 | zindar |    11 |   66 | a4        |
+|    2 | john   |    11 |   99 | a2        |
+|    3 | roman  |    88 |   88 | a3        |
++------+--------+-------+------+-----------+
+
+-> There is a problem in this now say
+         e_id -> e_name => e_name is functionally dependent on e_id
+         (e_id,p_id) -> e_name  //creates issue of partial dependency
+    ->RHS should be completly dependent on LHS, not just part of it
+    -> name can be uniquely identified with e_id only no need of p_id so e_name is partially
+       dependent on LHS.
+project id is different here
+Problem => now you have to change the employee address with employee id 2
+      now you have to go every row you need to go and change the address like in above example
+      in two rows you will have to change address from a2 to something different.
+      because you have stored redundant data
+      so that;s why here partial dependency
+
+Partial dependency creates problem so there is a way normalization which solves partial dependency problem.
+
+
+3) Transitivity => if Y is functionally dependent on X and Z is functionally dependent on Y then Z is
+                   functionally dependent on X.
+
+          if X -> Y and Y -> Z then X -> Z
+
+suppose if there is :
+    e_id, e_name, e_zip, e_state, e_phone
+
+    suppose e_id -> X
+            e_zip -> Y
+            e_state -> Z
+    e_id -> e_zip
+    e_zip -> e_state
+
+    this emplies
+
+    e_id -> e_state
+
+  This is also problematic
+
+  +------+--------+-------+------+-----------+
+  | e_id | e_name | e_zip | e_state | e_phno |
+  +------+--------+-------+------+-----------+
+  |    1 | aditya |  123  |   s1 |           |
+  |    2 | john   |  123  |   s1 |           |
+  +------+--------+-------+------+-----------+
+
+  Problem here is suppose we need to change the name of the state we need to go to all the rows of
+  all the employees where e_zip = 123 and change the corresponding state that's a repetative task
+  there could be better design.
+
++++++++++++++++++++++ DB KEYS +++++++++++++++++++++
+
+Keys => Keys are set of attributes that helps us to uniquely identify a record in different situation.
+
+Different type of keys
+1) super key
+2) composite key
+3) candidate key
+4) primary key
+5) foreign key
+6) alternate key
+
+
+super key => A set of attributes within a table that can uniquely identified.
+  tableName => emp
+  +------+--------+--------+
+  | e_id | e_name | e_phno |
+  +------+--------+--------+
+  |    1 | aditya |   s1   |
+  |    2 | john   |  s1    |
+  +------+--------+--------+
+
+There are different set of attribute using we can identified the row uniquely
+
+for example =>
+ 1) e_id = just by using employe id also you can identified every row uniquely because every employee have unique id.
+ 2) (e_id, e_name)
+ 3) e_phno = this will also unique
+ 4) (e_phno, e_name)
+ ..... so on there can be multiple ways
+ so this { e_id, (e_id, e_name) , (e_phno), (e_phno, e_name) } this set of all of the bunch of attributes is
+ called as super key. so there can be multiple super keys that exists for particular table and using any of the
+ super keys you can identified a record uniquely.
+
+
+candidate key => The minimum set of attribute that can uniquely identify a record.
+just e_id or e_phno can help us identify row uniquely.
+so e_id and e_phno  this two will be the two different candidate keys for given table(emp)
+
+e_id is also candidate key
+e_phno is also candidate key
+we do not say one attribute in candidate key there can be more than one.
+
+composite key => a key that consist of 2 or more than 2 attribute that together uniquely identified a
+                 record.
+
+the attribute that foam composite key are not any key independently.
+For ex =>
+       +------+--------+-----------+
+       | s_id | course_id |  marks |
+       +------+--------+-----------+
+       |    1 |    1      |   80   |
+       |    1 |    2      |   40   |
+       |    2 |    1      |   50   |
+       |    2 |    3      |   30   |
+       +------+--------+-----------+
+in order to uniquely identified a record a can not just take student id a can not even take just course_id
+
+but (s_id,course_id) can uniquely identified record.
+
+s_id and course_id is not key independently individual they can not identified a record uniquely but
+on combine they can identified
+
+-> composite key also a candidate key.
+the difference between them is there can be a candidate key with just one attribute or two attributes more than two
+attributes composite always have atleast two attributes there can be never composite key with one attribute.
+
+
+primary key => there can be more than one candidate key we can choose any one non-null candidate key to become
+               primary key.
+       OR
+any candidate key you can make a primary key with only constraint that it should not be null
+
+
+alternate key => all candidate keys apart from primary key are alternate keys.
+
+
+foreign key => it is an attribute which is primary key in some other table.
+
+
++++++++++++++++++++++ FUNCTIONAL DEPENDENCY CLOUSERE +++++++++++++++++++++
+
+functional dependency closure => it contains all the rules implined by a functional dependency.
+
+
+
+
+
