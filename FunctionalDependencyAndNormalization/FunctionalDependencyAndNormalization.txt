@@ -193,10 +193,184 @@ alternate key => all candidate keys apart from primary key are alternate keys.
 foreign key => it is an attribute which is primary key in some other table.
 
 
-+++++++++++++++++++++ FUNCTIONAL DEPENDENCY CLOUSERE +++++++++++++++++++++
++++++++++++++++++++++ FUNCTIONAL DEPENDENCY CLOSURE +++++++++++++++++++++
 
-functional dependency closure => it contains all the rules implined by a functional dependency.
+functional dependency closure (f*) => it contains all the rules implined by a functional dependency.
 
+
+   f -> { A -> B , C-D, B->C }
+
+   f* -> { A -> A, A->B , B -> C, A -> C, C->D, A -> D, B -> D, ......}
+
+-> attribute closure -> this defines all the attributes that can be determined using an attributes.
+
+   A* -> B, C, D
+   B* -> C , D
+
+
+   R -> { A B C D E }
+
+   A -> B
+   A -> E
+   C -> B
+   C -> E
+   B -> D
+
+   E* -> { E }
+   D* -> { D }
+   C* -> { C, B , E, D}
+   B -> {B , D}
+   A -> {A, B, E, D}
+
+
+Q => R = {A , B, C, D}
+
+     AB -> C
+     BC -> D
+     CD -> A
+
+A => A* -> { A }
+     AB* -> {C , D}
+     BC* -> {D, A}
+
+
++++++++++++++++++++++ NORMALIZATION +++++++++++++++++++++
+
+Normalization -> it is the process of determining how much redundancy exists in a table & it gives us techniques
+                 to reduce it.
+There are multiple normal forms
+-> 1NF
+-> 2NF
+-> 3NF
+-> BCNF
+
+-> every normal form is dependent on other for ex 2NF is dependent on 1NF 3NF is dependent on 2NF BCNF is dependent
+   on 3NF
+
++++++++++++++++++++++ 1 NF +++++++++++++++++++++
+
+# First Normal Form or 1NF => any attribute must only contain atomic(indivisible) values.
+
+       +------+--------+-----------+---+
+       | s_id |   s_name  |  s_courses |
+       +------+--------+-----------+---+
+       |    1 |    ankit  | dbms,os,dsa|
+       |    2 |    rohan  |   dsa,se   |
+       +------+--------+-----------+---+
+
+the problem exists here there wil be array in s_courses so if we have to rename the course like dsa so we will
+have to traverse all the values of every student
+if there is n student and m courses i n worst case we have n*m
+
+any attribute only contains atomic values below is the example
+       +------+--------+----------+---+
+       | s_id |   s_name  |  s_courses |
+       +------+--------+----------+---+
+       |    1 |    ankit  |   dbms     |
+       |    1 |    ankit  |   os       |
+       |    1 |    ankit  |   dsa      |
+       |    2 |    rohan  |   dsa      |
+       |    2 |    rohan  |   se       |
+       +------+--------+-----------+---+
+
+but still there is a redundancy
+
++++++++++++++++++++++ 2 NF +++++++++++++++++++++
+
+# Second Normal Form or 2NF => the tables should not have partial dependencies if there is PD then we need to
+                                resolve it.
+                                and the table should be already 1NF.
+
+       +------+--------+-----------+---+
+       | s_id |  c_name   |   marks    |
+       +------+--------+-----------+---+
+       |    1 |    DSA    |    100     |
+       |    2 |     OS    |     90     |
+       |    1 |     OS    |    100     |
+       |    3 |     OS    |     85     |
+       |    2 |    DSA    |     85     |
+       +------+--------+-----------+---+
+-> But there exists partial dependency
+
+          Table = Student
+         +------+--------+---+
+         | s_id |   s.name   |
+         +------+--------+---+
+         |    1 |    vinit   |
+         |    2 |    rohan   |
+         +------+--------+---+
+
+           Table = Course
+          +------+--------+---+
+          | c_id |   c.name   |
+          +------+--------+---+
+          |    1 |    os      |
+          |    2 |    dsa     |
+          |    3 |    dbms    |
+          +------+--------+---+
+          Table = student_course_marks (This table is also known as join table)
+         +------+--------+---+--------+
+         | s_id |   c.id     |  marks |
+         +------+--------+---+--------+
+         |    1 |      1     |  100   |
+         |    2 |      1     |  95    |
+         |    1 |      3     |  99    |
+         |    2 |      2     |  85    |
+         +------+--------+---+--------+
+
+-> better design from above now if we want to change course from DSA to OOPS we need to change only in
+   one place and it will update everywhere because we fetch the data by applying joins.
+-> here no redundancy of data
+
+
++++++++++++++++++++++ 3 NF +++++++++++++++++++++
+
+#Third normal form -> The table should be in 2NF and it should not have transitive dependency.
+
+  +------+--------+-------+------+-----------+
+  | e_id | e_name | e_zip | e_state | e_phno |
+  +------+--------+-------+------+-----------+
+  |    1 | aditya |  123  |   s1 |           |
+  |    2 | john   |  123  |   s1 |           |
+  +------+--------+-------+------+-----------+
+
+
+  e_id -> e_zip => e_zip can be identified by e_id
+  e_zip -> e_state => e_state can be identified by e_zip
+
+  WE CAN SAY
+  e_id -> e_state (This is transitive dependency)
+  now if we want to update the state from s1 to s1_ that will be problematic you will not be able to
+  update data but i do not know the reason and sanket also didn't tell.
+
+  we can refactor table like
+         table = Employee
+         +------+--------+---+--------+-----+
+         | e_id |   e_name   | e_phno | zip |
+         +------+--------+---+--------+-----|
+         |    1 |      1     |  100   |     |
+         |    2 |      1     |  95    |     |
+         |    1 |      3     |  99    |     |
+         |    2 |      2     |  85    |     |
+         +------+--------+---+--------+-----+
+
+          table = zip code
+          +------+--------+---+
+          | zip  |   state_id |
+          +------+--------+---+
+          | 1102 |     1      |
+          | 1103 |     2      |
+          +------+--------+---+
+
+            table = state
+          +------+--------+---+
+          | s_id | state_name |
+          +------+--------+---+
+          |    1 |    AP      |
+          |    2 |    MP      |
+          +------+--------+---+
+
++++++++++++++++++++++ PRACTICE NORMALIZATION +++++++++++++++++++++
 
 
 
